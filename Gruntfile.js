@@ -35,7 +35,8 @@ module.exports = function (grunt) {
         'bower_components/slug/slug.js',
         'bower_components/FileSaver/FileSaver.js',
         'bower_components/raml-client-generator/dist/raml-client-generator.js',
-        'bower_components/resolve-url/resolve-url.js'
+        'bower_components/resolve-url/resolve-url.js',
+        'bower_components/js-traverse/traverse.js'
       ],
       html: ['src/index.html'],
       scss: ['src/scss/light-theme.scss', 'src/scss/dark-theme.scss'],
@@ -46,7 +47,7 @@ module.exports = function (grunt) {
     connect: {
       options: {
         hostname: '0.0.0.0',
-        port:     9000
+        port:     grunt.option('port') || 9000
       },
 
       livereload: {
@@ -285,7 +286,8 @@ module.exports = function (grunt) {
 
     jshint: {
       options: {
-        jshintrc: true
+        jshintrc: true,
+        reporterOutput: ''
       },
 
       files: [

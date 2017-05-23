@@ -38,15 +38,30 @@ function ResourcesPO () {
     return this.getMethodsForResourceAt(resource).get(method).element(by.css('.raml-console-tab-label'));
   };
 
+  this.getTryItGetBtn = function (index) {
+    return this.resources.get(index+1).element(by.css('.raml-console-sidebar-action-get'));
+  };
+
+  this.getTryItErrorMessages = function (index) {
+    return this.resources.get(index+1).all(by.css('.raml-console-sidebar-row > .raml-console-resource-param-instructional'));
+  };
+
   this.getSecuritySchemes = function (index) {
     return this.resources.get(index+1).all(by.tagName('option'));
   };
+
+  this.getSecuritySchemeHeaderTitles = function (index) {
+    return this.resources.get(index+1).all(by.css('.raml-console-resource-param-heading'));
+  };
+
   this.getUsernameField = function () {
     return element(by.name('username'));
   };
+
   this.getPasswordField = function () {
     return element(by.name('password'));
   };
+
   this.getCloseBtn = function (index) {
     return this.resources.get(index+1).all(by.css('.raml-console-resource-close-btn'));
   };
@@ -64,8 +79,23 @@ function ResourcesPO () {
     button.click();
   };
 
-  this.getReponseExamples = function (resource) {
+  this.getResponseExamples = function (resource) {
     return this.resources.get(resource+1).element(by.css('.raml-console-hljs pre code'));
+  };
+
+  this.getResponseSchemaExamples = function (resource) {
+    var button = this.resources.get(resource+1).element(by.css('.raml-console-schema-body h4 .raml-console-flag'));
+    button.click();
+
+    return this.getResponseExamples(resource);
+  };
+
+  this.getRequestUrl = function (resource) {
+    var requestSection = this.resources.get(resource + 1).element(by.css('.raml-console-sidebar-expand-btn'));
+    requestSection.click();
+
+    return this.resources.get(resource + 1)
+      .element(by.css('.raml-console-sidebar-request-url'));
   };
 }
 
